@@ -42,8 +42,8 @@ async function bootstrap() {
       // Allow server-to-server, Cloudflare worker, Postman, SSR requests
       if (!origin) return cb(null, true);
 
-      // Allow localhost for local development
-      if (origin.includes('localhost') || origin.includes('127.0.0.1')) return cb(null, true);
+      // Allow localhost and EC2 IP for development/testing
+      if (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes('13.134.227.59')) return cb(null, true);
 
       // Allow your production domains (including subdomains)
       if (allowedDomainRegex.test(origin)) return cb(null, true);
